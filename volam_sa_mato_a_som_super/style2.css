@@ -1,0 +1,82 @@
+div, h1 {
+    margin-top: 20px;
+} 
+
+h1 {
+    margin-left: 88px;
+    margin-bottom: -40px;
+}
+
+p {
+    margin-bottom: 5px;
+}
+
+input[name='name'] {
+    width: 360px;
+    height: 33px;
+}
+
+textArea[name='description'] {
+    height: 100px;
+    width: 350px;
+}
+
+textArea[name='map'] {
+    height: 100px;
+    width: 350px;
+}
+
+select {
+    margin-left: 10px;
+    width: 116px;
+    height: 30px;
+    font-size: 15px;
+}
+
+select[name="county"] {
+    width: 140px;
+}
+
+
+input[type='submit'] {
+    width: 200px;
+    height: 45px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+input[type='submit']:hover {
+    cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+select:hover{
+    cursor: pointer;
+}
+
+option:hover {
+    cursor: pointer;
+}
+
+.add {
+    margin-left: 40px;
+    
+}
+
+.delete {
+    margin-left: 50px;
+    
+}
+
+.images {
+    margin-left: 45px;
+    
+}
+
+.name {
+    text-align: center;
+    
+}

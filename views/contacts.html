@@ -1,0 +1,46 @@
+<!-- contact -->
+<div id="contact" class="fullSection contact">
+    <div class="section-heading">
+        <h2 id="locationsHeader">Kontaktujte nás</h2>
+    </div>
+
+    <div class="row">
+        <!-- Contact Form -->
+        <!-- In order to set the email address and subject line for the contact form go to the contact_me.php file. -->
+        <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
+            <div class="contact-form  wow fadeInLeft showdelay2">
+                <form  name="sentMessage" id="contactForm" novalidate>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Meno</label>
+                            <input type="text" class="form-control" id="name" placeholder="Name" required data-validation-required-message="Please enter your name.">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email Address" required data-validation-required-message="Please enter your email address.">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Správa</label>
+                            <textarea class="form-control" rows="7" id="message" placeholder="Message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-custom btn-lg">Odošli</button>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- ./contact form -->
+
+    </div>
+</div>
+<!-- ./contact -->

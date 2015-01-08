@@ -1,0 +1,82 @@
+/*.gallery-item {
+    -webkit-animation: bounceInLeft 0.5s;
+    -moz-animation: bounceInLeft 0.5s;
+    -o-animation: bounceInLeft 0.5s;
+    animation: bounceInLeft 0.5s;
+}*/
+/*
+.ng-enter, .ng-move{
+    -webkit-animation: bounceInRight 1s;
+    -moz-animation: bounceInRight 1s;
+    -o-animation: bounceInRight 1s;
+    animation: bounceInRight 1s;
+}
+*/
+/*.view-slide-in.ng-enter {
+    -webkit-animation: fadeIn 0.5s;
+        -moz-animation: fadeIn 0.5s;
+        -o-animation: fadeIn 0.5s;
+        animation: fadeIn 0.5s;
+}*/
+
+#contact {
+    -webkit-animation: bounceInLeft 0.5s;
+    -moz-animation: bounceInLeft 0.5s;
+    -o-animation: bounceInLeft 0.5s;
+    animation: bounceInLeft 0.5s;
+}
+
+.locationThumbWrapper.ng-leave {
+    -webkit-animation: fadeOutRight 0.5s;
+    -moz-animation: fadeOutRight 0.5s;
+    -o-animation: fadeOutRight 0.5s;
+    animation: fadeOutRight 0.5s;
+}
+
+.locationThumbWrapper.ng-enter {
+    -webkit-animation: fadeInRight 0.5s;
+    -moz-animation: fadeInRight 0.5s;
+    -o-animation: fadeInRight 0.5s;
+    animation: fadeInRight 0.5s;
+}
+.header {
+    -webkit-animation: fadeIn 0.5s;
+    -moz-animation: fadeIn 0.5s;
+    -o-animation: fadeIn 0.5s;
+    animation:fadeIn 0.5s;
+}
+
+.location {
+    -webkit-animation: fadeInUp 0.5s;
+    -moz-animation: fadeInUp 0.5s;
+    -o-animation: fadeInUp 0.5s;
+    animation:fadeInUp 0.5s;
+}
+
+.superClass {
+    -webkit-animation: fadeInUp 2s;
+    -moz-animation: fadeInUp 2s;
+    -o-animation: fadeInUp 2s;
+    animation: fadeInUp 2s;
+}
+
+.map {
+    -webkit-animation: rubberBand 1s;
+    -moz-animation: rubberBand 1s;
+    -o-animation: rubberBand 1s;
+    animation: rubberBand 1s;
+}
+
+.pictureFlip {
+    -webkit-animation: flipInX 0.5s;
+    -moz-animation: flipInX 0.5s;
+    -o-animation: flipInX 0.5s;
+    animation: flipInX 0.5s;
+}
+
+.locationGallery {
+    -webkit-animation: rubberBand 0.5s;
+    -moz-animation: rubberBand 0.5s;
+    -o-animation: rubberBand 0.5s;
+    animation: rubberBand 0.5s;
+}

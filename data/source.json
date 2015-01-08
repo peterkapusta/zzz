@@ -1,0 +1,28 @@
+{
+    "locations": {
+        "horna-dolna": {
+            "locationName": "Horna Dolna 789",
+            "alias": "horna-dolna",
+            "description": "",
+            "map": "",
+            "images": 6,
+            "suggested": false
+        },
+        "velka-maca123": {
+            "locationName": "Velka Maca 123",
+            "alias": "velka-maca",
+            "description": "",
+            "map": "",
+            "images": 4,
+            "suggested": true
+        },
+        "vincov-haj888": {
+            "locationName": "Vincov Haj 321",
+            "alias": "vincov-haj",
+            "description": "",
+            "map": "",
+            "images": 6,
+            "suggested": true
+        }
+    }
+}

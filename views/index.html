@@ -1,0 +1,137 @@
+<!-- Locations -->
+<div class="fullSection">
+
+    <div class="row">
+        <div class="section-heading">
+            <h2 id="locationsHeader" class="header">{{ sectionHeader}}</h2>
+        </div>
+    </div>
+
+
+    <!-- FILTER -->
+    <div class="row container-fluid filter" ng-show="filter">
+        <div class="col-lg-5 col-md-6 col-sm-12">
+
+            <!-- FILTER for county -->
+            <div class="row">
+                <div class="col-lg-7">
+                    <label>
+                        <input type="checkbox" class="checkbox" ng-click="toggleFilter('county')"/>
+                        <label class="checkboxLabel">Podľa kraja</label>
+                    </label>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="row" ng-show="countyFilter">
+                                <select ng-change="changeColor('selectCountyFilter', 'black')" ng-model="search.county_name" value="easy" id="selectCountyFilter">
+                                    <option value="" disabled selected="selected" class="disabled selectPlaceholder">Vyber kraj</option>
+                                    <option class="selectOpttion" ng-repeat="county in counties" ng-click="" class="selectOption" value="{{ county.alias}}">{{ county.name}}</option>
+                                </select>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <!-- end of FILTER for county -->
+
+            <!-- FILTER for difficulty -->
+            <div class="row">
+                <div class="col-lg-7">
+                    <input type="checkbox" class="checkbox"  ng-click="toggleFilter('difficulty')"/>
+                    <label class="checkboxLabel">Podľa náročnosti</label>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="row" ng-show="difficultyFilter">
+                                <select ng-change="changeColor('selectDiffFilter', 'black')" ng-model="search.difficulty" value="easy" id="selectDiffFilter">
+                                    <option value="" disabled selected="selected" class="disabled selectPlaceholder">Vyber náročnosť</option>
+                                    <option class="selectOpttion" value="easy">Ľahká</option>
+                                    <option class="selectOpttion" value="medium">Stredne ťažká</option>
+                                    <option class="selectOpttion" value="hard">Náročná</option>
+                                </select>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of FILTER for county -->
+
+            <!-- FILTER for length -->
+            <div class="row">
+                <div class="col-lg-7">
+                    <input type="checkbox" class="checkbox"  ng-click="toggleFilter('length')"/>
+                    <label class="checkboxLabel">Podľa dĺžky [km]</label>
+                </div>
+            </div>
+
+            <div class="row lengthFilter">
+                <div class="col-lg-12" ng-show="lengthFilter">
+                    <div class="row">
+                        <div class="col-lg-12" range-slider min="length.range.min" max="length.range.max" 
+                             model-min="length.min" model-max="length.max" 
+                             step="100"></div>
+                    </div>
+
+                    <div class="row">
+                        <div id="lengthFrom" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{ length.min / 1000}} km</div>
+                        <div id="lengthTo" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{ length.max / 1000}} km</div>
+                    </div>
+
+
+                </div>
+            </div>    
+            <!-- end of FILTER for length -->
+
+        </div>
+
+        <!-- searchbar for location name -->
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <label>Názov trasy: <input type="text" class="form-control" ng-model="search.name"></label>
+
+        </div>
+        <!-- end of searchbar for location name -->
+
+    </div>
+    <!-- end of FILTER  -->
+
+
+    <!-- List of locations -->
+    <div class="row locationsList">     
+        <div class="col-md-12"> 
+            <div class="row">
+                <!-- Location -->
+                <div ng-repeat="location in locations| filter:search:strict | filter:filterLength()" class="col-lg-4 col-md-6 col-sm-12 locationThumbWrapper clearfix">
+                    <div class="locationItem">  
+                        <!-- Location image -->
+                        <div class="row">  
+                            <a ng-href="#/trasa/{{ location.alias}}">  
+                                <img class="img-responsive locationThumbnail" ng-src="images/locations/{{ location.alias}}.jpg" alt="">  
+                            </a>  
+                        </div>  
+                        <!-- end of Location image -->
+
+                        <!-- Location name -->
+                        <div class="row">  
+                            <a ng-href="#/trasa/{{ location.alias}}">  
+                                <p>{{ location.name}}</p>
+                            </a>  
+                        </div>
+                        <div class="row">  
+                            <p>Dlzka: {{ location.length}}</p>
+                        </div>
+                        <!-- end of Location name -->
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end of Location -->
+            </div>
+        </div>
+    </div>
+    <!-- end of List of locations -->
+
+</div>
+<!-- ./Locations -->

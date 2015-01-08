@@ -1,0 +1,158 @@
+h1 {
+    display: none;
+}
+
+input, option {
+    color: black !important;
+}
+
+.form-control {
+    color: #fff !important;
+}
+
+.selectOption {
+    color: #fff !important;
+}
+
+.checkboxLabel {
+    margin-left: 5px;
+}
+
+.checkbox {
+    display: inline;
+}
+
+#selectCountyFilter, #selectDiffFilter, .selectPlaceholder {
+    color: rgb(160, 160, 160) !important;
+}
+
+#selectCountyFilter, #selectDiffFilter {
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+}
+
+.filter {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+.navbar-brand img {
+    width: 170px;
+    margin-left: -8px;
+    margin-top: -20px;
+}
+
+.navbarMenu {
+    margin-top: -40px;
+
+}
+
+.county {
+    padding-left: 30px !important;
+    margin-bottom: -7px;
+}
+
+.map iframe {
+
+    margin-bottom: -8px;
+}
+
+.map {
+    margin-top: 10px;
+    padding: 0;
+    border-radius: 3px;
+    border: 1px solid #C7CF59;
+}
+
+
+#counties {
+    padding: 10px 15px;
+}
+
+
+
+
+/* All Locations list */
+
+#locationsHeader {
+    margin-bottom: 10px;
+    margin-top: -20px;
+}
+
+.locationsList {
+    margin-left: 40px;
+}
+
+.locationsList a {
+
+    text-decoration: none !important;
+}
+
+.locationThumbnail, .locationPicture {
+
+    border: 2px solid #C7CF59;
+
+
+    max-width: 100%;
+
+    height: 200px;
+
+    width: 350px;
+
+}
+
+.locationItem p {
+    font-weight: bold;
+    text-align: center;
+    float: left;
+}
+
+.locationThumbWrapper {
+    margin-bottom: 60px;
+
+}
+
+
+
+.location {
+    background: rgba(0,0,0,0.7);
+
+    border-radius: 3px;
+    border: 1px solid #C7CF59;
+}
+
+#locationDescription {
+    text-align: justify;
+    padding-right: 20px;
+}
+
+#locationHeader {
+    margin-bottom: 45px;
+
+}
+
+
+
+.locationWrapper {
+    margin-right: 0px;
+}
+
+.search {
+    margin-bottom: 45px;
+
+}
+
+#lengthFrom {
+    margin-top: -25px;
+}
+
+#lengthTo {
+    text-align: right;   
+    margin-top: -25px;
+}
+
+.lengthFilter {
+    height: 72px
+}

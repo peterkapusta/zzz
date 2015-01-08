@@ -1,0 +1,60 @@
+<div id="location" class="fullSection container-fluid">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1 location">
+                <h2 id="locationHeader">{{ location.name}}</h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p id="locationDescription">{{ location.description}}<p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-fluid" id="map">
+        <div class="row">
+            <animation animation="test3" offset="50%" for="map">
+                <div class="col-md-8 col-md-offset-1 map tes3">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <div ng-bind-html="map"></div>
+                    </div>
+                </div>
+            </animation>
+        </div>
+
+    </div>
+
+    
+    
+    <div class="row locationImages">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6" ng-repeat="n in countOfImages">
+                            <animation animation="map" offset="50%">
+                                <div class="pic">
+                                    <a ng-href="http://localhost/zzz/images/locations/{{ location.alias }}_{{ $index }}.jpg" class="gallery-item">
+                                        <img class="img-responsive img-thumbnail locationPicture" 
+                                             ng-src="http://localhost/zzz/images/locations/{{ location.alias }}_{{ $index }}.jpg" alt="">
+                                        <div class="img_overlay "></div>
+                                    </a>
+                                </div>
+                            </animation>
+                        </div>
+                    </div> 
+
+                </div>
+            </div>
+        </div>  
+    </div>
+
+</div>
+
+
+<div render-gallery></div>
+
