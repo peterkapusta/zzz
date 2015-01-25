@@ -35,7 +35,7 @@
     <body class="bg-slider nopadd" data-spy="scroll" data-target=".navbar-custom" >
         <div class="preloader">
             <div class="loader-item">
-                <img src="images/biker1.gif" alt="loader">
+                <img src="images/loading.gif" alt="loader">
             </div>
         </div>
 
@@ -70,8 +70,6 @@
                                 {{ county.name}}
                             </a>
                         </li>
-
-                        <li class="page-scroll"><a href="#najdi-trasu">Nájdi trasu</a></li>
                         <li class="page-scroll"><a href="#">Partneri</a></li>
                         <li class="page-scroll"><a href="#kontakt">Napíšte nám</a></li>
                     </ul>
@@ -84,17 +82,20 @@
         <!-- ./main-menu -->
 
         <div id="main-content">
-            <img src="images/tes.gif">
+            <img src="images/tes.gif" id="teseract">
+            <img src="images/tes.gif" id="testeract-right">
+            <img src="images/tes.gif" id="testeract-bottom">
+            <img src="images/tes.gif" id="testeract-bottom-right">
             <section ng-view class="fullSection view-slide-in" ng-animate-children></section>
 
             <!-- footer -->
             <footer id="footer">
                 <div class="container-fluid">
                     <div class="text-center">
-                        &copy; 2014 Kam na bicykli | info@kamnabicykli.com
+                        &copy; 2015 Kam na bicykli | info@kamnabicykliz.sk
                     </div>
                 </div>
-            </footer>	
+            </footer>
             <!-- ./footer -->
         </div>
 
@@ -102,6 +103,12 @@
         <script src="js/jquery.min.js"></script>
         <!-- bootstrap -->
         <script src="js/bootstrap.min.js"></script>
+        
+        
+        <script src="js/jqbootstrapvalidation/jqBootstrapValidation.js"></script>
+        
+        
+        
         <!-- wayPoints -->
         <script src="js/jquery.waypoints.min.js"></script>
         <!-- easing -->

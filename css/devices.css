@@ -54,3 +54,26 @@
         margin-top: 0px;
     }
 }
+
+
+@media (max-width: 1212px)  and (min-width:990px) {
+    .property {
+        height: 100px !important;
+
+    }
+}
+
+@media (max-width: 1000px) {
+    .property-right {
+        border: none;
+
+    }
+}
+
+@media (max-width: 770px) {
+    .property {
+        border-bottom: 1px solid #C7CF59;
+        border-right: none;
+
+    }
+}

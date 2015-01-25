@@ -101,6 +101,8 @@ input, option {
 
     width: 350px;
 
+    border-radius: 3px;
+
 }
 
 .locationItem p {
@@ -153,4 +155,47 @@ input, option {
 
 .lengthFilter {
     height: 72px
+}
+
+#teseract {
+    height: 80px;   
+}
+
+#testeract-bottom {
+    height: 80px;  
+    position: absolute;
+    right: 0px;
+}
+
+#testeract-bottom-right {
+    height: 80px;   
+    position: absolute;
+    bottom: 0px;
+    right: 0px
+}
+
+#testeract-right {
+    height: 80px;  
+    position: absolute;
+    bottom: 0px;
+}
+
+.property {
+    border-right: 1px solid #C7CF59;
+}
+
+#locationProperies {
+    margin-top: 10px;
+}
+
+.easy {
+    color: rgb(6, 192, 6);
+}
+
+.medium {
+    color: rgb(111, 189, 245); 
+}
+
+.hard {
+    color: rgb(231, 66, 66);
 }

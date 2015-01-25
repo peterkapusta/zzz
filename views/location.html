@@ -1,5 +1,6 @@
 <div id="location" class="fullSection container-fluid">
 
+    <!-- Location name and description -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 col-md-offset-1 location">
@@ -14,10 +15,32 @@
 
         </div>
     </div>
+    <!-- End of location name and description -->
 
+    <!-- Location properties -->
+    <div class="container-fluid" id="locationProperies">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1 location">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-12 property">
+                        <label>Dĺžka trasy</label><p id="locationDescription">{{ location.length/1000}} km<p>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12 property property-right">
+                        <label>Náročnosť</label><p id="locationDescription" class="{{ difficulty().style }}">{{ difficulty().name}}<p>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12 property-right">
+                        <label>Videné</label><p id="locationDescription">{{ location.seen}} krát<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of location properties -->
+    
+    <!-- Location map -->
     <div class="container-fluid" id="map">
         <div class="row">
-            <animation animation="test3" offset="50%" for="map">
+            <animation animation="test3" offset="20%" for="map">
                 <div class="col-md-8 col-md-offset-1 map tes3">
                     <div class="embed-responsive embed-responsive-16by9">
                         <div ng-bind-html="map"></div>
@@ -25,11 +48,10 @@
                 </div>
             </animation>
         </div>
-
     </div>
-
+    <!-- End of location map -->
     
-    
+    <!-- Location gallery -->
     <div class="row locationImages">
         <div class="container-fluid">
             <div class="row">
@@ -52,6 +74,7 @@
             </div>
         </div>  
     </div>
+    <!-- End of location gallery -->
 
 </div>
 
