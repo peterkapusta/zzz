@@ -17,16 +17,16 @@ class DataSource {
         $st->execute();
         return $st->fetchAll(PDO::FETCH_OBJ);
     }
-    
+
     public function getByDifficulty($difficulty) {
         $st = $this->db->prepare("SELECT * FROM location WHERE difficulty=?");
         $st->execute(array($difficulty));
         return $st->fetchAll(PDO::FETCH_OBJ);
     }
-    
-    public function getByLength($type='less', $length) {
+
+    public function getByLength($type = 'less', $length) {
         $mark = '<';
-        if($type === 'more') {
+        if ($type === 'more') {
             $mark = '>';
         }
         $sql = "SELECT * FROM location WHERE length" . $mark . "?";
@@ -57,6 +57,15 @@ class DataSource {
                                     where c.name = ?");
         $st->execute(array($county));
         return $st->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function updateLocation($attribute, $value, $location) {
+        $st = $this->db->prepare("UPDATE location SET $attribute = ? WHERE id = ?");
+        $test = $st->execute(array($value, $location->id));
+        var_dump($test);
+        var_dump($attribute);
+        var_dump($value);
+        var_dump($location->id);
     }
 
 }

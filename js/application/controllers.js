@@ -108,13 +108,54 @@ controllers.controller('CountyLocationsController', ['$scope', '$routeParams', '
 controllers.controller('LocationController', ['$scope', '$routeParams', '$sce', 'Locations', 'Helper',
     function ($scope, $routeParams, $sce, Locations, Helper) {
         window.scrollTo(0, 0);
-
-
-
+        
         Locations.get({id: $routeParams.alias}, function (data) {
             $scope.location = data;
             var map = $scope.location.map;
             $scope.map = $sce.trustAsHtml(map);
+            
+            $scope.location.seen++;
+            Locations.save({id:11}, $scope.location);
+            var resizeMap = function () {
+                var map = $scope.location.map;
+
+                console.log(map);
+
+                var width = '';
+                var height = '';
+                var iframeHeight = '';
+
+                if (window.innerWidth < 800) {
+                    height = '300';
+                    iframeHeight = '572';
+                } else if (window.innerWidth >= 800 && window.innerWidth < 1100) {
+                    height = '350';
+                    iframeHeight = '663';
+                } else if (window.innerWidth >= 1100 && window.innerWidth < 1300) {
+                    height = '480';
+                    iframeHeight = '628';
+                } else {
+                    height = '600';
+                    iframeHeight = '775';
+                }
+
+                width = document.getElementById('mapOuterWrapper').offsetWidth;
+                console.log(width);
+
+                var changedMap = map.replace(/640/g, width);
+
+                changedMap = changedMap.replace('480', height);
+                changedMap = changedMap.replace('628', iframeHeight);
+                $scope.map = $sce.trustAsHtml(changedMap);
+            }
+            
+            resizeMap();
+
+            $(window).resize(function () {
+                $scope.$apply(function () {
+                    resizeMap();
+                });
+            });
 
             $scope.difficulty = function () {
                 switch ($scope.location.difficulty) {

@@ -54,7 +54,7 @@ input, option {
     margin-bottom: -7px;
 }
 
-.map iframe {
+.col-md-8.col-md-offset-1.map.tes3.test3 {
 
     margin-bottom: -8px;
 }
@@ -198,4 +198,12 @@ input, option {
 
 .hard {
     color: rgb(231, 66, 66);
+}
+
+#mapwrapper #map {
+    border: none !important;
+}
+
+#mapOuterWrapper {
+    height: 740px;
 }

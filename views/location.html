@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-1 location">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12 property">
+                    <div class="col-md-4 col-sm-6 col-xs-12 property property-right">
                         <label>Dĺžka trasy</label><p id="locationDescription">{{ location.length/1000}} km<p>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12 property property-right">
@@ -42,7 +42,7 @@
         <div class="row">
             <animation animation="test3" offset="20%" for="map">
                 <div class="col-md-8 col-md-offset-1 map tes3">
-                    <div class="embed-responsive embed-responsive-16by9">
+                    <div class="embed-responsive embed-responsive-16by9" id="mapOuterWrapper">
                         <div ng-bind-html="map"></div>
                     </div>
                 </div>

@@ -56,7 +56,7 @@
 }
 
 
-@media (max-width: 1212px)  and (min-width:990px) {
+@media (max-width: 1212px) and (min-width:990px) {
     .property {
         height: 100px !important;
 
@@ -75,5 +75,30 @@
         border-bottom: 1px solid #C7CF59;
         border-right: none;
 
+    }
+}
+
+
+@media (max-width: 750px) {
+    #mapOuterWrapper {
+        height: 430px
+    }
+}
+
+@media (min-width: 751px) and (max-width:1100px) {
+    #mapOuterWrapper {
+        height: 480px
+    }
+}
+
+@media (min-width: 1101px) and (max-width:1300px) {
+    #mapOuterWrapper {
+        height: 610px
+    }
+}
+
+@media (min-width: 1301px) and (max-width:1500px) {
+    #mapOuterWrapper {
+        height: 725px
     }
 }
