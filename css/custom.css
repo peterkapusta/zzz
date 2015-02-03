@@ -207,3 +207,7 @@ input, option {
 #mapOuterWrapper {
     height: 740px;
 }
+
+.locationImages {
+    margin-top: 5px;
+}

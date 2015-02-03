@@ -2,7 +2,7 @@
 $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlhl3ze3', 'jq78Nh234Pm');
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="sk">
     <head>
         <meta charset="UTF-8" />
         <title>Admin</title>
@@ -30,16 +30,16 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
                 <div class="col-md-4">
                     <form id='sampleform' method='post' action='http://localhost/zzz/volam_sa_mato_a_som_super/index.php' >
                         <div>
-                            <p>Name:</p> <input type='text' name='name' />
+                            <p>Name:</p> <input type='text' name='name' spellcheck="false"/>
                         </div>
                         <div>
-                            <p>Description:</p> <textarea name='description'/></textarea>
+                            <p>Description:</p> <textarea name='description' spellcheck="false"></textarea>
                         </div>
                         <div>
-                            <p>Map:</p> <textarea name='map' ></textarea>
+                            <p>Map:</p> <textarea name='map' spellcheck="false"></textarea>
                         </div>
                         <div>
-                            <p>Length:</p> <input type='text' name='length' />  [m]
+                            <p>Length:</p> <input type='text' name='length' spellcheck="false"/>  [m]
                         </div>
                         <div> County
                             <select name="county">

@@ -97,7 +97,7 @@
         <div class="col-md-12"> 
             <div class="row">
                 <!-- Location -->
-                <div ng-repeat="location in locations| filter:search:strict | filter:filterLength()" class="col-lg-4 col-md-6 col-sm-12 locationThumbWrapper clearfix">
+                <div ng-repeat="location in locations| filter:search:strict | filter:filterLength()| orderBy:'name':false" class="col-lg-4 col-md-6 col-sm-12 locationThumbWrapper clearfix">
                     <div class="locationItem">  
                         <!-- Location image -->
                         <div class="row">  
@@ -112,9 +112,6 @@
                             <a ng-href="#/trasa/{{ location.alias}}">  
                                 <p>{{ location.name}}</p>
                             </a>  
-                        </div>
-                        <div class="row">  
-                            <p>Dlzka: {{ location.length}}</p>
                         </div>
                         <!-- end of Location name -->
                     </div>
