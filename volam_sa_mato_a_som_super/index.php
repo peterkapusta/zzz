@@ -89,7 +89,7 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
                             </select>
                         </div>
                         <?php if (!isset($_GET['edit'])): ?>
-                            <input type="hidden" name="insert" value="true">
+                            <input type="hidden" name="create" value="true">
                         <?php else: ?>
                             <input type="hidden" name="edit" value="true">
                             <input type="hidden" name="location" value="<?php echo $location["id"]; ?>">
@@ -153,7 +153,7 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
         } else {
             echo 'Ale, ale ... Takto lahko to veru nepojde, moj, NEVYPLNIL SI VSETKO!!!!';
         }
-    } else if (isset($_POST['insert'])) {
+    } else if (isset($_POST['create'])) {
         if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['county']) 
                 && isset($_POST['length']) && isset($_POST['difficulty']) && isset($_POST['map'])) {
             try {
@@ -166,13 +166,13 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
                 $map = $_POST['map'];
                 $difficulty = $_POST['difficulty'];
                 $length = $_POST['length'];
+                $hash = round(microtime(true) * 1000);
 
+                $st = $db->prepare("INSERT INTO location (name, alias, description, map, is_suggested, difficulty, length, hash) "
+                        . "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 
-                $st = $db->prepare("INSERT INTO location (name, alias, description, map, is_suggested, difficulty, length) "
-                        . "VALUES(?, ?, ?, ?, ?, ?, ?)");
-
-
-                $params = array($name, $alias, $description, $map, $isSuggested, $difficulty, $length);
+                
+                $params = array($name, $alias, $description, $map, $isSuggested, $difficulty, $length, $hash);
 
                 $st->execute($params);
                 $locationId = $db->lastInsertId();
@@ -195,7 +195,7 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
     }
 
 
-    $sql = "SELECT id, name, alias, images FROM location ORDER BY id DESC";
+    $sql = "SELECT * FROM location ORDER BY id DESC";
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
@@ -204,7 +204,7 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
     foreach ($result as $row) {
         $images = $row['images'];
         echo "<tr>"
-        . "<td><a href='http://localhost/zzz/volam_sa_mato_a_som_super/upload.php?location={$row['alias']}' class='btn btn-primary add'>+</a></td>"
+        . "<td><a href='http://localhost/zzz/volam_sa_mato_a_som_super/upload.php?location={$row['hash']}' class='btn btn-primary add'>+</a></td>"
         . "<td><p class='name'>{$row['name']}</p></td>"
         . "<td><p class='images'>{$images}</p></td>"
         . "<td><input type='button' class='btn btn-success edit' value='e' id='{$row['id']}'></td>"
