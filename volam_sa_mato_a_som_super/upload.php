@@ -61,11 +61,12 @@ if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST" && isset($_GET['locat
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+	<meta name="robots" content="noindex,nofollow,noarchive">
         <title>Multiple File Upload with PHP - Demo</title>
         <link href="style.css" rel="stylesheet">
-        <link href="/zzz/css/bootstrap.min.css" rel="stylesheet">
-        <script src="/zzz/js/jquery.js"></script>
-        <script src="/zzz/js/bootstrap.min.js"></script>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <script src="/js/jquery.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
 
     </head>
     <body>
@@ -99,7 +100,7 @@ if (isset($_GET['location'])) {
                 <input type="submit" value="Upload" class="btn btn-success">
             </form>
             <div class="row">
-                <a href="http://localhost/zzz/volam_sa_mato_a_som_super/">Back to admin</a>
+                <a href="/volam_sa_mato_a_som_super/">Back to admin</a>
             </div>
         </div>
     </body>

@@ -10,28 +10,29 @@ app.constant("config", {
 
 app.config(function ($routeProvider) {
     $routeProvider.
-            when('/', {
-                templateUrl: 'views/index.html',
-                controller: 'HomeController',
-            }).
-            when('/najdi-trasu', {
-                templateUrl: 'views/index.html',
-                controller: 'SearchForLocationController',
-            }).
-            when('/trasa/:alias', {
-                templateUrl: 'views/location.html',
-                controller: 'LocationController',
-            }).
-            when('/trasy/kraje/:county', {
-                templateUrl: 'views/index.html',
-                controller: 'CountyLocationsController',
-            }).
-            when('/galeria', {
-                templateUrl: 'views/galery.html'
-            }).
-            when('/kontakt', {
-                templateUrl: 'views/contacts.html',
-                controller: 'ContactController',
-            }).
-            otherwise({redirectTo: '/'});
+        when('/', {
+            templateUrl: 'views/index.html',
+            controller: 'HomeController',
+        }).
+        when('/najdi-trasu', {
+            templateUrl: 'views/index.html',
+            controller: 'SearchForLocationController',
+        }).
+        when('/trasa/:alias', {
+            templateUrl: 'views/location.html',
+            controller: 'LocationController',
+        }).
+        when('/trasy/kraje/:county', {
+            templateUrl: 'views/index.html',
+            controller: 'CountyLocationsController',
+        }).
+        when('/galeria', {
+            templateUrl: 'views/galery.html'
+        }).
+        when('/kontakt', {
+            templateUrl: 'views/contacts.html',
+            controller: 'ContactController',
+        }).
+        otherwise({redirectTo: '/'});
 });
+

@@ -211,3 +211,10 @@ input, option {
 .locationImages {
     margin-top: 5px;
 }
+
+.showMore {
+    color: #fff !important;
+    font-weight: bold;
+    width: 70%;
+    height: 40px;
+}

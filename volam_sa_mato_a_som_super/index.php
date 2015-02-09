@@ -2,25 +2,37 @@
 $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlhl3ze3', 'jq78Nh234Pm');
 ?>
 <!doctype html>
-<html lang="sk">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <title>Admin</title>
-
-        <link href="/zzz/css/bootstrap.min.css" rel="stylesheet">
+        <meta name="robots" content="noindex,nofollow,noarchive">
+        <link href="http://localhost/zzz/css/bootstrap.min.css" rel="stylesheet">
         <link href="style2.css" rel="stylesheet">
-        <script src="/zzz/js/jquery.js"></script>
-        <script src="/zzz/js/bootstrap.min.js"></script>
+        <script src="http://localhost/zzz/js/jquery.js"></script>
+        <script src="http://localhost/zzz/js/bootstrap.min.js"></script>
 
     </head>
     <body>
+        <?php
+        if (isset($_REQUEST['edit'])) {
+            $locationId = $_GET['location'];
+            $st = $db->prepare("SELECT * FROM location l join county_location cl on(cl.location_id = l.id) WHERE l.id=?");
+            $st->execute(array($locationId));
+            $location = $st->fetch(PDO::FETCH_ASSOC);
+            var_dump($location);
+            
+        }
+        ?>
+
         <script>
             var url = window.location.href;
             if (url.indexOf(".php") > -1) {
                 window.location = 'http://localhost/zzz/volam_sa_mato_a_som_super/';
             }
-            
+
         </script>
+
         <div class="row">
             <h1>Admin</h1> 
         </div>
@@ -30,16 +42,32 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
                 <div class="col-md-4">
                     <form id='sampleform' method='post' action='http://localhost/zzz/volam_sa_mato_a_som_super/index.php' >
                         <div>
-                            <p>Name:</p> <input type='text' name='name' spellcheck="false"/>
+                            <p>Name:</p> <input type='text' name='name' spellcheck="false" <?php 
+                                                                if (isset($_GET['edit'])){ 
+                                                                    echo 'value="' . $location['name'] . '"'; 
+                                                                }
+                                                                    ?>/>
                         </div>
                         <div>
-                            <p>Description:</p> <textarea name='description' spellcheck="false"></textarea>
+                            <p>Description:</p> <textarea name='description' spellcheck="false" ><?php 
+                                                                if (isset($_GET['edit'])){ 
+                                                                    echo $location['description']; 
+                                                                }
+                                                                    ?></textarea>
                         </div>
                         <div>
-                            <p>Map:</p> <textarea name='map' spellcheck="false"></textarea>
+                            <p>Map:</p> <textarea name='map' spellcheck="false"><?php 
+                                                                if (isset($_GET['edit'])){ 
+                                                                    echo $location['map']; 
+                                                                }
+                                                                    ?></textarea>
                         </div>
                         <div>
-                            <p>Length:</p> <input type='text' name='length' spellcheck="false"/>  [m]
+                            <p>Length:</p> <input type='text' name='length' spellcheck="false"  <?php 
+                                                                if (isset($_GET['edit'])){ 
+                                                                    echo 'value="' . $location['length'] . '"'; 
+                                                                }
+                                                                    ?>/>  [m]
                         </div>
                         <div> County
                             <select name="county">
@@ -60,86 +88,142 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
                                 <option value="hard">Hard</option>
                             </select>
                         </div>
-                        <input type="hidden" name="was_send" value="yes">
+                        <?php if (!isset($_GET['edit'])): ?>
+                            <input type="hidden" name="insert" value="true">
+                        <?php else: ?>
+                            <input type="hidden" name="edit" value="true">
+                            <input type="hidden" name="location" value="<?php echo $location["id"]; ?>">
+                        <?php endif; ?>
                         <div>
                             <input type='submit' class="btn btn-success" name='Submit' value='Submit' />
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6">
-                    <h3>List of locations</h3>
-                    <table class="table">
-                        <th>Add images</th>
-                        <th>Location name</th>
-                        <th>Count of images</th>
-                        <th>Delete whole location</th>
-                        <?php
-                        if (isset($_POST['was_send'])) {
-                            if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['county']) && isset($_POST['length']) && isset($_POST['difficulty']) && isset($_POST['map'])) {
-                                try {
+                <?php if (!isset($_GET['edit'])): ?>
+                    <div class="col-md-6">
+                        <h3>List of locations</h3>
+                        <table class="table">
+                            <th>Add images</th>
+                            <th>Location name</th>
+                            <th>Count of images</th>
+                            <th></th>
+                            <th></th>
+    <?php
+    
+    
+    
+    if (isset($_POST['edit'])) {
+        if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['county']) 
+                && isset($_POST['length']) && isset($_POST['difficulty']) && isset($_POST['map'])) {
+            try {
 
-                                    $isSuggested = 'no';
-                                    if (isset($_POST['is_suggested'])) {
-                                        $isSuggested = 'yes';
-                                    }
+                $isSuggested = 'no';
+                $name = $_POST['name'];
+                $alias = getAlias($name);
+                $description = $_POST['description'];
+                $map = $_POST['map'];
+                $difficulty = $_POST['difficulty'];
+                $length = $_POST['length'];
+                
+                $locationId = $_POST['location'];
 
-                                    $name = $_POST['name'];
-                                    $alias = getAlias($name);
-                                    $description = $_POST['description'];
-                                    $map = $_POST['map'];
-                                    $difficulty = $_POST['difficulty'];
-                                    $length = $_POST['length'];
+                $st = $db->prepare("UPDATE location SET name = ?, alias=?, description=?, map=?, is_suggested=?, difficulty=?, length=? "
+                        . "WHERE id=?");
+
+                $params = array($name, $alias, $description, $map, $isSuggested, $difficulty, $length, $locationId);
+
+                $test = $st->execute($params);
+                $locationId = $location["id"];
+
+                $st = $db->prepare("SELECT id FROM county WHERE name LIKE ?");
+                $test = $st->execute(array($_POST['county']));
+                $row = $st->fetch(PDO::FETCH_ASSOC);
+                $countyId = $row['id'];
+
+                $st = $db->prepare("DELETE FROM county_location WHERE id=?");
+                $params = array($locationId);
+                $test = $st->execute($params);
+                
+                $st = $db->prepare("INSERT INTO county_location (county_id, location_id) VALUES(?,?)");
+                $params = array($countyId, $locationId);
+                $test = $st->execute($params);
+            } catch (PDOException $e) {
+                echo 'Connection failed: ' . $e->getMessage();
+            }
+        } else {
+            echo 'Ale, ale ... Takto lahko to veru nepojde, moj, NEVYPLNIL SI VSETKO!!!!';
+        }
+    } else if (isset($_POST['insert'])) {
+        if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['county']) 
+                && isset($_POST['length']) && isset($_POST['difficulty']) && isset($_POST['map'])) {
+            try {
+                
+                $isSuggested = 'no';
+
+                $name = $_POST['name'];
+                $alias = getAlias($name);
+                $description = $_POST['description'];
+                $map = $_POST['map'];
+                $difficulty = $_POST['difficulty'];
+                $length = $_POST['length'];
 
 
-                                    $st = $db->prepare("INSERT INTO location (name, alias, description, map, is_suggested, difficulty, length) "
-                                            . "VALUES(?, ?, ?, ?, ?, ?, ?)");
+                $st = $db->prepare("INSERT INTO location (name, alias, description, map, is_suggested, difficulty, length) "
+                        . "VALUES(?, ?, ?, ?, ?, ?, ?)");
 
 
-                                    $params = array($name, $alias, $description, $map, $isSuggested, $difficulty, $length);
+                $params = array($name, $alias, $description, $map, $isSuggested, $difficulty, $length);
 
-                                    $st->execute($params);
-                                    $locationId = $db->lastInsertId();
+                $st->execute($params);
+                $locationId = $db->lastInsertId();
 
-                                    $st = $db->prepare("SELECT id FROM county WHERE name LIKE ?");
-                                    $st->execute(array($_POST['county']));
-                                    $row = $st->fetch(PDO::FETCH_ASSOC);
-                                    $countyId = $row['id'];
+                $st = $db->prepare("SELECT id FROM county WHERE name LIKE ?");
+                $st->execute(array($_POST['county']));
+                $row = $st->fetch(PDO::FETCH_ASSOC);
+                $countyId = $row['id'];
 
-                                    $st = $db->prepare("INSERT INTO county_location (county_id, location_id) VALUES(?,?)");
-                                    $params = array($countyId, $locationId);
+                $st = $db->prepare("INSERT INTO county_location (county_id, location_id) VALUES(?,?)");
+                $params = array($countyId, $locationId);
 
-                                    $st->execute($params);
-                                } catch (PDOException $e) {
-                                    echo 'Connection failed: ' . $e->getMessage();
-                                }
-                            } else {
-                                echo 'Ale, ale ... Takto lahko to veru nepojde, moj, NEVYPLNIL SI VSETKO!!!!';
-                            }
-                        }
+                $st->execute($params);
+            } catch (PDOException $e) {
+                echo 'Connection failed: ' . $e->getMessage();
+            }
+        } else {
+            echo 'Ale, ale ... Takto lahko to veru nepojde, moj, NEVYPLNIL SI VSETKO!!!!';
+        }
+    }
 
 
-                        $sql = "SELECT id, name, alias, images FROM location ORDER BY id DESC";
+    $sql = "SELECT id, name, alias, images FROM location ORDER BY id DESC";
 
-                        $stmt = $db->prepare($sql);
-                        $stmt->execute();
-                        $result = $stmt->fetchAll();
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
 
-                        foreach ($result as $row) {
-                            $images = $row['images'];
-                            echo "<tr>"
-                            . "<td><a href='/zzz/volam_sa_mato_a_som_super/upload.php?location={$row['alias']}' class='btn btn-primary add'>+</a></td>"
-                            . "<td><p class='name'>{$row['name']}</p></td>"
-                            . "<td><p class='images'>{$images}</p></td>"
-                            . "<td><input type='button' class='btn btn-danger delete' value='X' id='{$row['id']}'></td>"
-                            . "</tr>";
-                        }
-                        ?>
-                    </table>
-                </div>
+    foreach ($result as $row) {
+        $images = $row['images'];
+        echo "<tr>"
+        . "<td><a href='http://localhost/zzz/volam_sa_mato_a_som_super/upload.php?location={$row['alias']}' class='btn btn-primary add'>+</a></td>"
+        . "<td><p class='name'>{$row['name']}</p></td>"
+        . "<td><p class='images'>{$images}</p></td>"
+        . "<td><input type='button' class='btn btn-success edit' value='e' id='{$row['id']}'></td>"
+        . "<td><input type='button' class='btn btn-danger delete' value='X' id='{$row['id']}'></td>"
+        . "</tr>";
+    }
+    ?>
+                        </table>
 
+                    </div>
+<?php endif; ?>
             </div>
         </div>
 
+<?php
+if (isset($_GET['edit'])) {
+    
+}
+?>
         <script>
             $(document).ready(function () {
 
@@ -157,9 +241,12 @@ $db = new PDO('mysql:host=mysql51.websupport.sk;dbname=kamnabic;port=3309', 'tlh
                         });
                     }
                     return false;
-
                 });
-            })
+
+                $(".edit").click(function () {
+                    window.location.href = "?edit=true&location=" + $(this).attr('id');
+                });
+            });
 
         </script>
     </body>

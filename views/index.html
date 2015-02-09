@@ -12,23 +12,6 @@
     <div class="row container-fluid filter" ng-show="filter">
         <div class="col-lg-5 col-md-6 col-sm-12">
 
-            <!-- FILTER for county -->
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="row" ng-show="countyFilter">
-                                <select ng-change="changeColor('selectCountyFilter', 'black')" ng-model="search.county_name" value="easy" id="selectCountyFilter">
-                                    <option value="" disabled selected="selected" class="disabled selectPlaceholder">Vyber kraj</option>
-                                    <option class="selectOpttion" ng-repeat="county in counties" ng-click="" class="selectOption" value="{{ county.alias}}">{{ county.name}}</option>
-                                </select>
-                            </div>    
-                        </div>
-                    </div>
-                </div>
-            </div> 
-            <!-- end of FILTER for county -->
-
             <!-- FILTER for difficulty -->
             <div class="row">
                 <div class="col-lg-7">
@@ -91,13 +74,14 @@
     </div>
     <!-- end of FILTER  -->
 
-
     <!-- List of locations -->
     <div class="row locationsList">     
         <div class="col-md-12"> 
             <div class="row">
                 <!-- Location -->
-                <div ng-repeat="location in locations| filter:search:strict | filter:filterLength()| orderBy:'name':false" class="col-lg-4 col-md-6 col-sm-12 locationThumbWrapper clearfix">
+                <div ng-repeat="location in locations| filter:search:strict | filter:filterLength() 
+                            | limitTo : maxLocations | orderBy:'name':false" 
+                            class="col-lg-4 col-md-6 col-sm-12 locationThumbWrapper clearfix">
                     <div class="locationItem">  
                         <!-- Location image -->
                         <div class="row">  
@@ -111,6 +95,7 @@
                         <div class="row">  
                             <a ng-href="#/trasa/{{ location.alias}}">  
                                 <p>{{ location.name}}</p>
+                                <p> -- {{ location.length / 1000 }}</p>
                             </a>  
                         </div>
                         <!-- end of Location name -->
@@ -123,5 +108,10 @@
     </div>
     <!-- end of List of locations -->
 
+    <div class="row">
+        <div class="col-md-12">
+            <input type="button" class="btn btn-success showMore center-block" value="Zobraz ďalšie trate" ng-click="showMoreLocations()" ng-show="maxLocations < maxLocationsToShow" >
+        </div>
+    </div>
 </div>
 <!-- ./Locations -->

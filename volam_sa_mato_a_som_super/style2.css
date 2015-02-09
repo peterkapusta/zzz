@@ -3,7 +3,7 @@ div, h1 {
 } 
 
 h1 {
-    margin-left: 88px;
+    margin-left: 30px;
     margin-bottom: -40px;
 }
 
@@ -43,6 +43,7 @@ input[type='submit'] {
     height: 45px;
     font-size: 16px;
     font-weight: bold;
+	margin-top: 100px;
 }
 
 input[type='submit']:hover {
