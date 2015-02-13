@@ -10,16 +10,27 @@ controllers.controller('NavigationController', ['$scope', 'Counties',
 controllers.controller('HomeController', ['$scope', 'Locations', 'Helper',
     function ($scope, Locations, Helper) {
         $scope.sectionHeader = "Náhodné trasy";
-
+        
         Locations.query(function (data) {
-            $scope.locations = Helper.arrayShuffle(data);
-
-            $scope.maxLocations = 9;
-;
-            $scope.showMoreLocations = function () {
-                var step = 9;
-                $scope.maxLocations += step;
-            }
+            
+            //var initLocationsPerPage = 6;
+            var locationsShowed = 6;
+            //var loadedRow = 1;
+            var loadedLocations = 1;
+            $scope.allLocations = Helper.arrayShuffle(data);
+            
+            $scope.locations = $scope.allLocations.slice(0, locationsShowed);
+            //$scope.locations = $scope.allLocations.slice(0, initLocationsPerPage);
+            
+            $scope.loadMore = function() {
+                if ($scope.locations.length < $scope.allLocations.length) {
+                    locationsShowed += loadedLocations;
+                    $scope.locations = $scope.allLocations.slice(0, locationsShowed);
+                    
+                    //var added = $scope.allLocations.slice($scope.locations.length, $scope.locations.length + loadedRow);
+                    //$scope.locations = $scope.locations.concat(added);
+                }
+            };
 
             $scope.images = [];
             $.each(data, function (index, location) {
@@ -42,19 +53,29 @@ controllers.controller('CountyLocationsController', ['$scope', '$routeParams', '
             name: $routeParams.county
         }, function (data) {
             $scope.locations = data;
-            var countOfColumns = 3;
-            $scope.columns = Helper.numberVal(countOfColumns);
-            var locationsListRows = Math.ceil($scope.locations.length / countOfColumns);
-            $scope.rows = Helper.numberVal(locationsListRows);
             
-            $scope.maxLocationsToShow = $scope.locations.length;
-           // $scope.filteredCountOfLocations = $scope.locations.length;
+            //var initLocationsPerPage = 6;
+            var locationsShowed = 6;
+            //var loadedRow = 1;
+            var loadedLocations = 1;
+            $scope.allLocations = Helper.arrayShuffle(data);
+            
+            $scope.locations = $scope.allLocations.slice(0, locationsShowed);
+            //$scope.locations = $scope.allLocations.slice(0, initLocationsPerPage);
+            
+            $scope.loadMore = function() {
+                if ($scope.locations.length < $scope.allLocations.length) {
+                    locationsShowed += loadedLocations;
+                    $scope.locations = $scope.allLocations.slice(0, locationsShowed);
+                    
+                    //var added = $scope.allLocations.slice($scope.locations.length, $scope.locations.length + loadedRow);
+                    //$scope.locations = $scope.locations.concat(added);
+                }
+            };
             
         });
 
         $scope.filter = true;
-//        $scope.lengthFilter = false;
-//        $scope.difficultyFilter = false;
 
         $scope.counties = Counties.getCounties();
 
@@ -68,85 +89,8 @@ controllers.controller('CountyLocationsController', ['$scope', '$routeParams', '
                 max: 200000,
             }
         };
-
         
-        
-        /*
-        
-        $scope.countOfFilteredLocations = function() {
-            var res = 0; 
-            
-            for (var location in $scope.locations) {
-                if (location.difficulty == $scope.search.difficulty) {
-                    res++;
-                }
-            }
-            
-            $scope.test = res;
-        };
-        */
-        var locationsPerSite = 3;
-        $scope.maxLocations = locationsPerSite;
-        function setFilteredCount () {
-            var maximum = 0;
-            
-            /*
-            for (var location in $scope.locations) {
-                if ($scope.lengthFilter) {
-                    if (location.length > $scope.length.min && location.length < $scope.length.max) {
-                        maximum++;
-                    }
-                }
-                
-                
-                
-                if ($scope.difficultyFilter) {
-                    if (location.difficulty == $scope.search.difficulty) {
-                        maximum++;
-                    }
-                }
-            }
-            */
-           
-           angular.forEach($scope.locations,function(value,index){
-               
-                if ($scope.lengthFilter && $scope.difficultyFilter) {
-                    if (value.length > $scope.length.min 
-                            && value.length < $scope.length.max 
-                            && value.difficulty == $scope.search.difficulty) {
-                        
-                    }
-                } else if ($scope.lengthFilter && !$scope.difficultyFilter) {
-                    if (value.length > $scope.length.min && value.length < $scope.length.max) {
-                        maximum++;
-                    }
-                } else if ($scope.difficultyFilter && !$scope.lengthFilter) {
-                    if (value.difficulty == $scope.search.difficulty) {
-                        maximum++;
-                    }
-                } 
-                
-                
-                
-           });
-           
-            
-            $scope.maxLocationsToShow = $scope.locations.length;
-            if (maximum > 0) {
-                $scope.maxLocationsToShow = maximum;
-            }
-        }
-        
-        $scope.showMoreLocations = function () {
-            var step = locationsPerSite;
-            setFilteredCount();
-            $scope.maxLocations += step;
-        };
-        
-        $scope.changedLength = false;
-
         $scope.filterLength = function () {
-            //$scope.changedLength = !$scope.changedLength;
             return function (location) {
                 if (location.length > $scope.length.min && location.length < $scope.length.max) {
                     return location;
@@ -162,10 +106,9 @@ controllers.controller('CountyLocationsController', ['$scope', '$routeParams', '
         };
 
         $scope.toggleFilter = function (type) {
-            
+            $scope.locations = $scope.allLocations;
             
             if (type === 'difficulty') {
-                $scope.maxLocations = locationsPerSite;
                 $scope.difficultyFilter = !$scope.difficultyFilter;
                 
                 if (!$scope.difficultyFilter) {
@@ -180,38 +123,12 @@ controllers.controller('CountyLocationsController', ['$scope', '$routeParams', '
                 $scope.lengthFilter = !$scope.lengthFilter;
                 
                 if (!$scope.lengthFilter) {
-                    //$scope.search.difficulty = '';
                     $scope.length.min = lengthFrom;
                     $scope.length.max = lengthTo;
-                    
-                    $scope.maxLocations = $scope.locations.length;
-
-                } else {
-                    
-                    
-                    
-                    //$scope.changeColor('selectDiffFilter', 'rgb(160, 160, 160)');
                 }
-                
-                
-                
             };
-            
-            //setFilteredCount();
+
         };
-        
-        
-        $scope.$watch('search.difficulty', function() {
-            //alert("hello");
-            setFilteredCount();
-            $scope.maxLocations = locationsPerSite;
-        });
-        
-        $scope.$watch('changedLength', function() {
-            //getFilteredCount();
-            //$scope.maxLocations = locationsPerSite;
-        });
-        
 
     }]);
 
@@ -290,73 +207,6 @@ controllers.controller('LocationController', ['$scope', '$routeParams', '$sce', 
             });
         });
     }]);
-
-
-controllers.controller('SearchForLocationController', ['$scope', '$routeParams', 'Locations', 'Counties',
-    function ($scope, $routeParams, Locations, Counties) {
-
-        $scope.sectionHeader = "Nájdi svoju trasu";
-        window.scrollTo(0, 0);
-
-        $scope.filter = true;
-//        $scope.lengthFilter = false;
-//        $scope.difficultyFilter = false;
-
-        $scope.counties = Counties.getCounties();
-
-        var lengthFrom = 0;
-        var lengthTo = 100000;
-        $scope.length = {
-            min: lengthFrom,
-            max: lengthTo,
-            range: {
-                min: 0,
-                max: 100000
-            }
-        };
-
-        $scope.filterLength = function () {
-            return function (location) {
-                if (location.length > $scope.length.min && location.length < $scope.length.max) {
-                    return location;
-                }
-                return null;
-            };
-        }
-
-        $scope.changeColor = function (id, color) {
-            var select = $("#" + id);
-            select.attr('style', 'color:' + color + ' !important');
-        };
-
-        $scope.toggleFilter = function (type) {
-            if (type === 'difficulty') {
-                $scope.difficultyFilter = !$scope.difficultyFilter;
-                if (!$scope.difficultyFilter) {
-                    $scope.search.difficulty = '';
-                } else {
-                    $scope.changeColor('selectDiffFilter', 'rgb(160, 160, 160)');
-                }
-            } else if (type === 'length') {
-                $scope.lengthFilter = !$scope.lengthFilter;
-                if (!$scope.lengthFilter) {
-                    //$scope.search.difficulty = '';
-                    $scope.length.min = lengthFrom;
-                    $scope.length.max = lengthTo;
-
-                } else {
-                    //$scope.changeColor('selectDiffFilter', 'rgb(160, 160, 160)');
-                }
-            }
-            ;
-        };
-
-        Locations.query(function (data) {
-            $scope.locations = data;
-        });
-
-    }]);
-
 
 controllers.controller('ContactController', ['$scope', 'Helper', '$http',
     function ($scope, Helper, $http) {

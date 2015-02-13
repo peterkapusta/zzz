@@ -1,3 +1,9 @@
+<!--
+<div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+    <img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
+</div>
+-->
+
 <!-- Locations -->
 <div class="fullSection">
 
@@ -77,10 +83,10 @@
     <!-- List of locations -->
     <div class="row locationsList">     
         <div class="col-md-12"> 
-            <div class="row">
+            <div class="row" infinite-scroll='loadMore()' infinite-scroll-distance='2'>
                 <!-- Location -->
                 <div ng-repeat="location in locations| filter:search:strict | filter:filterLength() 
-                            | limitTo : maxLocations | orderBy:'name':false" 
+                             | orderBy:'name':false" 
                             class="col-lg-4 col-md-6 col-sm-12 locationThumbWrapper clearfix">
                     <div class="locationItem">  
                         <!-- Location image -->
@@ -95,7 +101,6 @@
                         <div class="row">  
                             <a ng-href="#/trasa/{{ location.alias}}">  
                                 <p>{{ location.name}}</p>
-                                <p> -- {{ location.length / 1000 }}</p>
                             </a>  
                         </div>
                         <!-- end of Location name -->
@@ -108,10 +113,16 @@
     </div>
     <!-- end of List of locations -->
 
+    
+
+    
+     <!--
     <div class="row">
         <div class="col-md-12">
             <input type="button" class="btn btn-success showMore center-block" value="Zobraz ďalšie trate" ng-click="showMoreLocations()" ng-show="maxLocations < maxLocationsToShow" >
         </div>
     </div>
+     -->
+     
 </div>
 <!-- ./Locations -->

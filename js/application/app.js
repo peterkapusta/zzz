@@ -1,4 +1,4 @@
-var app = angular.module('AppModule', ['ui-rangeSlider', 'ControllersModule', 'ServicesModule', 'FiltersModule', 'DirectivesModule']);
+var app = angular.module('AppModule', ['infinite-scroll', 'ui-rangeSlider', 'ControllersModule', 'ServicesModule', 'FiltersModule', 'DirectivesModule']);
 //var app = angular.module('AppModule', ['ngRoute', 'ngResource', 'ngAnimate', 'ngSanitize' , 'ControllersModule']);
 
 
@@ -13,10 +13,6 @@ app.config(function ($routeProvider) {
         when('/', {
             templateUrl: 'views/index.html',
             controller: 'HomeController',
-        }).
-        when('/najdi-trasu', {
-            templateUrl: 'views/index.html',
-            controller: 'SearchForLocationController',
         }).
         when('/trasa/:alias', {
             templateUrl: 'views/location.html',
